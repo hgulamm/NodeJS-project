@@ -1,61 +1,104 @@
-class Node {
+class Node
+{
   constructor(value){
-    this.left = null;
-    this.right = null;
-    this.value = value;
+  this.value=value;
+  this.left=null;
+  this.right=null;
   }
+    
 }
-
-class BinarySearchTree {
+class BST{
+   
   constructor(){
     this.root = null;
   }
   insert(value){
-    const newNode=new Node(value);
+   
+  
+  if(this.root==null)
+  {
+  return this.root=new Node(value);
+  }
+
+   
+   var node= this.traverse(this.root,value);
+   
+    return this.root;
+
+}
+lookup(value)
+{
+  
+  let node=this.root;
+  while(node){
     
-    if(this.root==null)
-    {
-      this.root=newNode;
-    }
-    else{
-    const tree=traverse(this.root);
-    if(value<tree.value)
-    {
-      this.tree.left=newNode;
-    }
-    else{
-      this.tree.right=newNode;
-    }
-    console.log(tree);
-    }
-    //Code here
+    if(value===node.value)
+  {
+    return true;
+
   }
-  lookup(value){
-    //Code here
+  if(value<node.value)
+  {
+    node=node.left;
   }
-  // remove
+  else{
+    node=node.right;
+  }
+  
+  
+  
+  }
+
+  return false;
+
+  
 }
 
-const tree = new BinarySearchTree();
-tree.insert(9)
-tree.insert(4)
-tree.insert(6)
-tree.insert(20)
-tree.insert(170)
-tree.insert(15)
-tree.insert(1)
-JSON.stringify(traverse(tree.root))
+ traverse(node,value)
+{
+ 
+  
+ if(node===null)
+  { 
+    node=new Node(value);
+     return node;
+  }
+ 
+  if(value<node.value)
+  {
+    node.left=this.traverse(node.left,value);
+    
+  }
+  else
+  {
+    node.right=this.traverse(node.right,value);
+   
+  }
 
-//     9
-//  4     20
-//1  6  15  170
+return node;
+  
+  }
+ 
 
-function traverse(node) {
-  const tree = { value: node.value };
-  tree.left = node.left === null ? null : traverse(node.left);
-  tree.right = node.right === null ? null : traverse(node.right);
-  return tree;
+
 }
+
+var bst=new BST();
+//bst.insert(10);
+bst.insert(9);
+
+bst.insert(4);
+bst.insert(20);
+bst.insert(170);
+bst.insert(15);
+bst.insert(1);
+bst.insert(10);
+JSON.stringify(bst.root);
+//bst.lookup(170);
+bst.lookup(45);
+ 
+
+
 
 
 
